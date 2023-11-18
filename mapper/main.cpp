@@ -27,36 +27,8 @@ auto open_binary(std::string m_sSource, std::vector< std::uint8_t >& m_aData) ->
 }
 
 
-void memory_scan(MEMORY_BASIC_INFORMATION mbi)
-{
-	/*lazy*/if ((mbi.State & MEM_COMMIT))
-		MessageBox(nullptr, "DLL PAGE DETECT 1", "ERROR", MB_ICONERROR);
-	/*lazy*/if (mbi.State & MEM_RELEASE)
-		MessageBox(nullptr, "ATTEMPTED 2", "ERROR", MB_ICONERROR);
-	/*lazy*/if (mbi.Type == MEM_IMAGE)
-		MessageBox(nullptr, "DLL PAGE DETECT 3", "ERROR", MB_ICONERROR);
-	/*lazy*/if (mbi.Protect == PAGE_NOACCESS || mbi.Protect & PAGE_GUARD)
-		MessageBox(nullptr, "DLL PAGE DETECT 4 ", "ERROR", MB_ICONERROR);
-	/*lazy*/if (mbi.Protect == PAGE_EXECUTE_READWRITE)
-		MessageBox(nullptr, "DLL PAGE DETECT 5", "ERROR", MB_ICONERROR);
-	/*lazy*/if (mbi.State == PAGE_EXECUTE_READWRITE)
-		MessageBox(nullptr, "DLL PAGE DETECT 5", "ERROR", MB_ICONERROR);
-
-	SYSTEM_INFO sys_information;
-	GetSystemInfo(&sys_information);
-
-	PBYTE pCurAddr = (PBYTE)sys_information.lpMinimumApplicationAddress;
-	PBYTE pMaxAddr = (PBYTE)sys_information.lpMaximumApplicationAddress;
-
-
-
-
-}
-MEMORY_BASIC_INFORMATION mbi;
 int main()
 {
-	memory_scan(mbi);
-
     vector<uint8_t> binary{};
     open_binary("hake.dll", binary);
 
